@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const imgSchema = new Schema({
-  photo: {
-    type: String,
-  },
+  tag: String,
+  url: String,
+  date:{type:Date , default:Date.now},
 });
 
-const Img = mongoose.model("Img", imgSchema);
+const eventData = mongoose.model("imgtag", imgSchema);
 
-module.exports = Img;
+module.exports = eventData;

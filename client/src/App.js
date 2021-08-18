@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import logo from "./resources/my_unsplash_logo.svg";
 import SearchIcon from "@material-ui/icons/Search";
 import Addphoto from "./components/Addphoto";
+import Preview from './components/Preview';
 
 const useStyles = makeStyles(() => ({
   search: {
@@ -127,7 +128,7 @@ const App = () => {
               </Button>
             </div>
           </Grid>
-          <Grid>photos</Grid>
+          <Preview />
         </Container>
       </ThemeProvider>
   );

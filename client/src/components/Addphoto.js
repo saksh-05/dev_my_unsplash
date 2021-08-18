@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import base_url from "../axios";
 import {
@@ -14,6 +14,7 @@ import {
   makeStyles,
   ThemeProvider,
 } from "@material-ui/core/styles";
+import Preview from "./Preview";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles(() => ({
   },
   btn: {
     color: "white",
+    marginLeft: "1rem",
     background: "#3DB46D",
     "&:hover": {
       backgroundColor: "#3DB46D",
@@ -71,7 +73,7 @@ const theme = createTheme({
 const Addphoto = ({ open, handleOpen }) => {
   const [url, setUrl] = useState("");
   const [tag, setTag] = useState("");
-
+  const [val, setVal] = useState({});
 
   const classes = useStyles();
 
@@ -79,20 +81,28 @@ const Addphoto = ({ open, handleOpen }) => {
     console.log(tag);
     console.log(url);
     console.log("submit");
-    const formData = new FormData();
-    const selectedFile = axios('get');
 
-      formData.append("myFile", );
+    axios
+      .post(`${base_url}upload`, {
+        tag: tag,
+        url: url,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data!==undefined) {
+          
+            setVal(res.data);
+        console.log(val);
 
-      axios
-        .post(`${base_url}upload`, formData)
-        .then((res) => {
-          console.log(res);
-          // setResFile(res.data.file);
-
-        })
-        .catch((err) => console.log(err));
+        }
+      })
+      .catch((err) => console.log(err));
+    handleOpen(false);
   };
+
+  useEffect(() => {
+    <Preview da={val}/>
+  }, [val]);
 
   return (
     <>
