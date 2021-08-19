@@ -31,7 +31,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/upload", (req, res) => {
-  console.log(req.body);
   var imageData = {
     tag: req.body.tag,
     url: req.body.url,
@@ -40,7 +39,6 @@ app.post("/upload", (req, res) => {
     .save()
     .then((result) => {
       res.send(result);
-      console.log(result);
     })
     .catch((err) => {
       res.status(400).send("unable to save to database");
@@ -54,23 +52,16 @@ app.get("/files", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  // eventData.find((err, tags) => {
-  //   if (err) throw new Error(err);
-  //   if (!tags)
-  //     console.log('Not found');
-  //   else
-  //     res.send(tags);
-  // })
 });
 
-// router.delete("/:id", async (req, res) => {
-//   try {
-//     await images.deleteOne({ _id: req.params.id });
-//     res.status(200).send();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+app.delete("/delete/:id", async (req, res) => {
+  try {
+    await eventData.deleteOne({ _id: req.params.id });
+    res.status(200).send('deleted');
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));

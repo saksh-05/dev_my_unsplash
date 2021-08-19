@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import base_url from "../axios";
 import {
@@ -77,32 +77,24 @@ const Addphoto = ({ open, handleOpen }) => {
 
   const classes = useStyles();
 
-  const handleAddPhoto = () => {
-    console.log(tag);
-    console.log(url);
-    console.log("submit");
-
-    axios
+  const handleAddPhoto = async() => {
+    setVal(await axios
       .post(`${base_url}upload`, {
         tag: tag,
         url: url,
       })
       .then((res) => {
+
         console.log(res.data);
-        if (res.data!==undefined) {
-          
-            setVal(res.data);
-        console.log(val);
-
-        }
+        return res.data;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)));
+    console.log(val);
+    setTag("");
+    setUrl("");
     handleOpen(false);
+    <Preview id={val._id} />
   };
-
-  useEffect(() => {
-    <Preview da={val}/>
-  }, [val]);
 
   return (
     <>
