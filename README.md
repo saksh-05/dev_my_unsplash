@@ -11,7 +11,7 @@ By doing this challenge I have better grasp over REST API , how to use image gri
 - React
 - Materail-ui
 - React responsive masonry( React library for image grid)
----
+- 
 ## BackEnd
 - NodeJs
 - ExpressJs
