@@ -1,6 +1,6 @@
 # My Unsplash
 
-! [Demo] (https://dev-my-unsplash.netlify.app/)
+! [Demo](https://dev-my-unsplash.netlify.app/)
 # Features
 
 It is an interesting challenge. It surely helps me strengthen my basic and help me improve.
