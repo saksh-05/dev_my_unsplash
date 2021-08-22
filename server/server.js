@@ -23,8 +23,6 @@ connection.once("open", () => {
   console.log("mongo DB success");
 });
 
-// const imgRouter = require("./routes/record");
-// app.use("/upload", imgRouter);
 
 app.get("/", (req, res) => {
   res.send("Image Page");
@@ -41,7 +39,7 @@ app.post("/upload", (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      res.status(400).send("unable to save to database");
+      console.log(err);
     });
 });
 

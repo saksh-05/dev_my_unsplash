@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import base_url from "../axios";
 import {
@@ -70,30 +70,26 @@ const theme = createTheme({
   },
 });
 
-const Addphoto = ({ open, handleOpen }) => {
+const Addphoto = ({ open, handleOpen, setId }) => {
   const [url, setUrl] = useState("");
   const [tag, setTag] = useState("");
-  const [val, setVal] = useState({});
-
   const classes = useStyles();
 
-  const handleAddPhoto = async() => {
-    setVal(await axios
+  const handleAddPhoto = async () => {
+    await axios
       .post(`${base_url}upload`, {
         tag: tag,
         url: url,
       })
       .then((res) => {
-
-        console.log(res.data);
-        return res.data;
+        setId(res.data._id);
+        <Preview />;
       })
-      .catch((err) => console.log(err)));
-    console.log(val);
+      .catch((err) => console.log(err));
+
     setTag("");
     setUrl("");
     handleOpen(false);
-    <Preview id={val._id} />
   };
 
   return (
@@ -120,10 +116,19 @@ const Addphoto = ({ open, handleOpen }) => {
               variant="outlined"
               placeholder="https://abc.com"
               value={url}
+              required
               onChange={(e) => setUrl(e.target.value)}
             />
             <div className={classes.actionbtn}>
-              <Button onClick={() => handleOpen(false)}>Cancel</Button>
+              <Button
+                onClick={() => {
+                  handleOpen(false);
+                  setTag("");
+                  setUrl("");
+                }}
+              >
+                Cancel
+              </Button>
               <Button onClick={handleAddPhoto} className={classes.btn}>
                 Submit
               </Button>
