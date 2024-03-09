@@ -89,7 +89,8 @@ const Preview = ({ id, keyword }) => {
     } else {
       getVal();
     }
-  }, [keyword,getVal, id]);
+    console.log(val);
+  }, [keyword, id,getVal]);
 
   const handleDelete = (e) => {
     const delId = e.target.parentNode.id;
